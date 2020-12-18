@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.lista',
     'apps.recurso',
+    'apps.usuario',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
@@ -56,6 +57,15 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny'],
     'DEFAULT_AUTHENTICATION_CLASSES' : ['rest_framework.authentication.TokenAuthentication'],
 }
+
+
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'apps.usuario.serializer.RegisterSerializer',
+}
+
+
+
 
 #TOKEN CONFIG
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -89,7 +99,6 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
-
 
 
 #corsheaders
