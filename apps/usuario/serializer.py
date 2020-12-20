@@ -49,3 +49,4 @@ class RegisterSerializer(serializers.Serializer):
         user.save()
         return user
 
+

@@ -1,0 +1,7 @@
+{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Saludos de Repository!
+
+Estás recibiendo este correo electrónico porque el usuario {{ user_display }} ha dado tu como dirección de correo electrónico para conectar su cuenta a nuestra sitio web.
+
+{% endblocktrans %}{% endautoescape %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Muchas gracias de Repository!
+{% endblocktrans %}
