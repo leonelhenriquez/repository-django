@@ -26,10 +26,6 @@ urlpatterns = [
     url(r'^registration/account-email-verification-sent/', views.null_view, name='account_email_verification_sent'),
     url(r'^registration/account-confirm-email/(?P<key>[-:\w]+)/$', ConfirmEmailView.as_view(), name='account_confirm_email'),
     url(r'^registration/complete/$', views.complete_view, name='account_confirm_complete'), # DESPUES DEL URL
-
-    # this url is used to generate email content
-    path('password-reset/confirm/<uidb64>/<token>/', TemplateView.as_view(), name='password_reset_confirm'),
-
     # Default urls
     url(r'', include('rest_auth.urls')),
     url(r'^registration/', include('rest_auth.registration.urls')),

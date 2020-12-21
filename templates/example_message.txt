@@ -4,13 +4,13 @@ ha solicitado un restablecimiento de contraseña para su cuenta de usuario en Re
 
 {% trans "Por favor, vaya a la siguiente página y elija una nueva contraseña:" %}
 {% block reset_link %}
-{{ protocol }}://holaMundo{% url 'password_reset_confirm' uidb64=uid token=token %}
+{{ protocol }}:/{% url 'password_reset_confirm' uidb64=uid token=token %}
 {% endblock %}
 {% trans "Su nombre de usuario, en caso de que haya olvidado: " %} {{ user.get_username }}
 
 {% trans "¡Gracias por nuestro usar!" %}
 
-{% blocktrans %}Del equipo Repository{% endblocktrans %}
+{% blocktrans %}Del equipo de Repository{% endblocktrans %}
 
 {% endautoescape %}
 

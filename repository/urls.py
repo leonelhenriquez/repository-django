@@ -17,11 +17,15 @@ from allauth.account.views import ConfirmEmailView
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 
 urlpatterns = [
     path('lista/', include('apps.lista.urls'), name='lista'),
     path('recurso/', include('apps.recurso.urls'), name='recurso'),
     path('rest-auth/', include('apps.usuario.urls'), name='rest-auth'),
+
+    # this url is used to generate email content
+    path('djangoproject.com/<uidb64>/<token>/', RedirectView.as_view(url='https://djangoproject.com'), name='password_reset_confirm'),
+    #path('go-to-django/', RedirectView.as_view(url='https://djangoproject.com'), name='go-to-django'),
     path('admin/', admin.site.urls),
 ]
