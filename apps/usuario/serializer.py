@@ -2,7 +2,11 @@ from allauth.account import app_settings as allauth_settings
 from allauth.utils import email_address_exists
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
+from django.contrib.auth.forms import PasswordResetForm
+from django.conf import settings
+from django.utils.translation import gettext as _
 from rest_framework import serializers
+from django.contrib.auth.models import User
 
 class RegisterSerializer(serializers.Serializer):
     username = serializers.CharField(required=True, write_only=True)
@@ -50,3 +54,29 @@ class RegisterSerializer(serializers.Serializer):
         return user
 
 
+class PasswordResetSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password_reset_form_class = PasswordResetForm
+    def validate_email(self, value):
+        self.reset_form = self.password_reset_form_class(data=self.initial_data)
+        if not self.reset_form.is_valid():
+            raise serializers.ValidationError(_('Error'))
+
+        ###### FILTER YOUR USER MODEL ######
+        if not User.objects.filter(email=value).exists():
+
+            raise serializers.ValidationError(_('Invalid e-mail address'))
+        return value
+
+    def save(self):
+        request = self.context.get('request')
+        opts = {
+            'use_https': request.is_secure(),
+            'from_email': getattr(settings, 'DEFAULT_FROM_EMAIL'),
+
+            ###### USE YOUR TEXT FILE ######
+            'email_template_name': 'example_message.txt',
+
+            'request': request,
+        }
+        self.reset_form.save(**opts)

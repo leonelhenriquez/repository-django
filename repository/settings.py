@@ -73,7 +73,10 @@ REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'apps.usuario.serializer.RegisterSerializer',
 }
 
-
+REST_AUTH_SERIALIZERS = {
+    'PASSWORD_RESET_SERIALIZER':
+        'apps.usuario.serializer.PasswordResetSerializer',
+}
 
 
 #TOKEN CONFIG
