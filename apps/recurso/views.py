@@ -1,8 +1,12 @@
+from apps import recurso
 from django.shortcuts import render
+from django.http import JsonResponse
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import *
 from .serializer import *
+from apps.recurso import serializer
 
 # Create your views here.
 
@@ -15,6 +19,53 @@ class RecursoView(APIView):
         recursoSerializer = RecursoSerializer(recurso, many=True)
         return Response(recursoSerializer.data)
 
+@api_view(['GET'])
+def apiOverview(request):
+    api_urls = {
+        'List' : '/recurso-list/',
+        'Detail View': '/recurso-detail/<str:pk>/',
+        'Create' : '/recurso-create/',
+        'Update' : '/recurso-update/<str:pk>/',
+        'Delete' : '/recurso-delete/<str:pk>/'
+    }
+    return Response(api_urls)
+
+
+#API CRUD Recurso
+
+@api_view(['GET'])
+def recursoList(request):
+        recursos = Recurso.objects.all();
+        serializer = RecursoSerializer(recursos, many=True)
+        return Response(serializer.data)
+
+@api_view(['GET'])
+def recursoDetail(request, pk):
+        recursos = Recurso.objects.all(id=pk);
+        serializer = RecursoSerializer(recursos, many=False)
+        return Response(serializer.data)
+
+@api_view(['POST'])
+def recursoCreate(request):
+    serializer = RecursoSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def recursoUpdate(request, pk):
+    recurso = Recurso.objects.get(id=pk)
+    serializer = RecursoSerializer(instance=recurso, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+def recursoDelete(request, pk):
+    recurso = Recurso.objects.get(id=pk)
+    recurso.delete()
+    return Response('Recurso Eliminado!')
+
 #API PARA TIPO_Recurso
     #Obtener todas los tipos de recurso
 class TipoRecursoView(APIView):
@@ -24,6 +75,52 @@ class TipoRecursoView(APIView):
         tipoRecursoSerializer = Tipo_RecursoSerializer(tipoRecurso, many=True)
         return Response(tipoRecursoSerializer.data)
 
+@api_view(['GET'])
+def apiOverview(request):
+    api_urls = {
+        'List' : '/tipoRecurso-list/',
+        'Detail View': '/tipoRecurso-detail/<str:pk>/',
+        'Create' : '/tipoRecurso-create/',
+        'Update' : '/tipoRecurso-update/<str:pk>/',
+        'Delete' : '/tipoRecurso-delete/<str:pk>/'
+    }
+    return Response(api_urls)
+
+#API CRUD Tipo Recurso
+
+@api_view(['GET'])
+def tipoRecursoList(request):
+        tipo_recursos = Tipo_Recurso.objects.all();
+        serializer = Tipo_RecursoSerializer(tipo_recursos, many=True)
+        return Response(serializer.data)
+
+@api_view(['GET'])
+def tipoRecursoDetail(request, pk):
+        tipo_recursos = Recurso.objects.all(id=pk);
+        serializer = Tipo_RecursoSerializer(tipo_recursos, many=False)
+        return Response(serializer.data)
+
+@api_view(['POST'])
+def tipoRecursoCreate(request):
+    serializer = Tipo_RecursoSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def tipoRecursoUpdate(request, pk):
+    tipo_recurso = Tipo_Recurso.objects.get(id=pk)
+    serializer = Tipo_RecursoSerializer(instance=tipo_recurso, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+def tipoRecursoDelete(request, pk):
+    tipo_recurso = Tipo_RecursoSerializer.objects.get(id=pk)
+    tipo_recurso.delete()
+    return Response('Tipo Recurso Eliminado!')
+
 #API PARA Categoria
     #Obtener todas las categorias
 class CategoriaView(APIView):
@@ -32,3 +129,49 @@ class CategoriaView(APIView):
         categoria = Categoria.objects.all()
         categoriaSerializer = Tipo_RecursoSerializer(categoria, many=True)
         return Response(categoriaSerializer.data)
+
+@api_view(['GET'])
+def apiOverview(request):
+    api_urls = {
+        'List' : '/categoria-list/',
+        'Detail View': '/categoria-detail/<str:pk>/',
+        'Create' : '/categoria-create/',
+        'Update' : '/categoria-update/<str:pk>/',
+        'Delete' : '/categoria-delete/<str:pk>/'
+    }
+    return Response(api_urls)
+
+#API CRUD Categoria
+
+@api_view(['GET'])
+def categoriaList(request):
+        categorias  = Categoria.objects.all();
+        serializer = CategoriaSerializer(categorias, many=True)
+        return Response(serializer.data)
+
+@api_view(['GET'])
+def categoriaDetail(request, pk):
+        categorias = Categoria.objects.all(id=pk);
+        serializer = CategoriaSerializer(categorias, many=False)
+        return Response(serializer.data)
+
+@api_view(['POST'])
+def categoriaCreate(request):
+    serializer = CategoriaSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def categoriaUpdate(request, pk):
+    categoria = Categoria.objects.get(id=pk)
+    serializer = CategoriaSerializer(instance=categoria, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+def categoriaDelete(request, pk):
+    categoria = Categoria.objects.get(id=pk)
+    categoria.delete()
+    return Response('Categoria Eliminada!')
