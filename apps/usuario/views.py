@@ -9,4 +9,4 @@ def null_view(request):
 
 @api_view()
 def complete_view(request):
-    return Response("Email account is activated")
+    return Response("La cuenta de correo electrónico está activada")
