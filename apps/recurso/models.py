@@ -26,6 +26,8 @@ class Recurso(models.Model):
     autor = models.CharField(max_length=250)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     fecha = models.DateField()
+    imagen = models.ImageField(upload_to='miniaturas', default=None)
+    archivo = models.FileField(blank=True, upload_to='files')
     def __str__(self):
         return self.titulo
 
