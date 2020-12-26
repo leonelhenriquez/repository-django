@@ -20,7 +20,7 @@ class RegisterSerializer(serializers.Serializer):
         email = get_adapter().clean_email(email)
         if allauth_settings.UNIQUE_EMAIL:
             if email and email_address_exists(email):
-                raise serializers.ValidationError(("A user is already registered with this e-mail address."))
+                raise serializers.ValidationError(("Un usuario ya está registrado con esta dirección de correo electrónico."))
         return email
 
     def validate_username(self, username):
@@ -32,7 +32,7 @@ class RegisterSerializer(serializers.Serializer):
 
     def validate(self, data):
         if data['password1'] != data['password2']:
-            raise serializers.ValidationError(("The two password fields didn't match."))
+            raise serializers.ValidationError(("Los dos campos de contraseña no coincidían."))
         return data
 
     def get_cleaned_data(self):
@@ -65,7 +65,7 @@ class PasswordResetSerializer(serializers.Serializer):
         ###### FILTER YOUR USER MODEL ######
         if not User.objects.filter(email=value).exists():
 
-            raise serializers.ValidationError(_('Invalid e-mail address'))
+            raise serializers.ValidationError(_('Dirección de correo electrónico inválida'))
         return value
 
     def save(self):
