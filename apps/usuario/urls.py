@@ -21,10 +21,12 @@ from django.views.generic import TemplateView
 from rest_auth.views import PasswordResetConfirmView
 
 from apps.usuario import views
+from .views import *
 
 urlpatterns = [
     url(r'^registration/account-email-verification-sent/', views.null_view, name='account_email_verification_sent'),
     url(r'^registration/account-confirm-email/(?P<key>[-:\w]+)/$', ConfirmEmailView.as_view(), name='account_confirm_email'),
+    path('update_profile/<int:pk>/', UpdateProfileView.as_view(), name='auth_update_profile'),
     url(r'^registration/complete/$', views.complete_view, name='account_confirm_complete'), # DESPUES DEL URL
     # Default urls
     url(r'', include('rest_auth.urls')),
