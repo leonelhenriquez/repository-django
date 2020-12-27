@@ -14,7 +14,7 @@ class Lista(models.Model):
     id = models.AutoField(primary_key=True,)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE,)
     tipo = models.ForeignKey(Tipo_Lista, on_delete=models.CASCADE)
-    fecha = models.DateField()
+    fecha = models.DateField(auto_now_add=True)
     def __str__(self):
         return self.tipo
     class Meta:

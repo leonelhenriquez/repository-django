@@ -1,3 +1,6 @@
+from datetime import datetime
+
+from django.core.validators import MaxValueValidator
 from django.db import models
 from django.conf import settings
 
@@ -22,10 +25,10 @@ class Recurso(models.Model):
     titulo = models.CharField(max_length=250)
     descripcion = models.CharField(max_length=250)
     tipo = models.ForeignKey(Tipo_Recurso, on_delete=models.CASCADE)
-    year = models.DateField()
+    anyo_publicacion = models.IntegerField(validators=[MaxValueValidator(datetime.now().year)])
     autor = models.CharField(max_length=250)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-    fecha = models.DateField()
+    fecha = models.DateField(auto_now_add=True)
     imagen = models.ImageField(upload_to='miniaturas', default=None)
     archivo = models.FileField(blank=True, upload_to='files')
     def __str__(self):
