@@ -40,9 +40,12 @@ class recursoList(generics.ListAPIView):
 
 @api_view(['GET'])
 def recursoDetail(request, pk):
-        recursos = Recurso.objects.all(id=pk);
+    try:
+        recursos = Recurso.objects.get(id=pk);
         serializer = RecursoSerializer(recursos, many=False)
         return Response(serializer.data)
+    except Recurso.DoesNotExist:
+        return Response({})
 
 '''
 @api_view(['POST'])

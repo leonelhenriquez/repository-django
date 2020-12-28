@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'corsheaders',
     'allauth.socialaccount',
+    'db_file_storage',
 ]
 
 #rest_framework
@@ -158,7 +159,7 @@ else:
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'repository',
             'USER': 'root',
-            'PASSWORD': '',
+            'PASSWORD': 'root',
             'HOST': 'localhost',
             'PORT': '3306',
         }
@@ -213,3 +214,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'repositorytpi@gmail.com'
 EMAIL_HOST_PASSWORD = 'repository123456'
+
+DEFAULT_FILE_STORAGE = 'db_file_storage.storage.DatabaseFileStorage'
+
