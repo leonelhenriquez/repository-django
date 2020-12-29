@@ -15,15 +15,18 @@ from .util import get_file_name
 class Tipo_Recurso(models.Model):
     id = models.AutoField(primary_key=True, )
     nombre = models.CharField(max_length=100)
-
     def __str__(self):
         return self.nombre
+    class Meta:
+        ordering = ['nombre']
 
 class Categoria(models.Model):
     id = models.AutoField(primary_key=True, )
     nombre = models.CharField(max_length=250)
     def __str__(self):
         return self.nombre
+    class Meta:
+        ordering = ['nombre']
 
 
 class RecursoImagen(models.Model):
@@ -58,7 +61,7 @@ class Recurso(models.Model):
     id = models.AutoField(primary_key=True)
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=250)
-    descripcion = models.CharField(max_length=250)
+    descripcion = models.CharField(max_length=500)
     tipo = models.ForeignKey(Tipo_Recurso, on_delete=models.CASCADE)
     anyo_publicacion = models.IntegerField(validators=[MaxValueValidator(datetime.now().year)])
     autor = models.CharField(max_length=250)

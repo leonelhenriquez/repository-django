@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^files/', include('db_file_storage.urls')),
     url(r'^registration/account-email-verification-sent/', views.null_view, name='account_email_verification_sent'),
     url(r'^registration/account-confirm-email/(?P<key>[-:\w]+)/$', ConfirmEmailView.as_view(), name='account_confirm_email'),
+    #Actualizar perfil
     path('update_profile/<int:pk>/', UpdateProfileView.as_view(), name='auth_update_profile'),
     url(r'^registration/complete/$', views.complete_view, name='account_confirm_complete'), # DESPUES DEL URL
     # Default urls

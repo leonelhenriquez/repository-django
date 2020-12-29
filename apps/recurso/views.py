@@ -120,7 +120,7 @@ def tipoRecursoList(request):
 '''
 
 class tipoRecursoList(generics.ListAPIView):
-    queryset = Tipo_Recurso.objects.all()
+    queryset = Tipo_Recurso.objects.all().order_by('nombre')
     serializer_class = Tipo_RecursoSerializer
 
 @api_view(['GET'])
@@ -139,7 +139,7 @@ def tipoRecursoCreate(request):
 '''
 
 class tipoRecursoCreate(generics.CreateAPIView):
-    queryset = Tipo_Recurso.objects.all()
+    queryset = Tipo_Recurso.objects.all().order_by('nombre')
     serializer_class = Tipo_RecursoSerializer
 
 '''
@@ -153,7 +153,7 @@ def tipoRecursoUpdate(request, pk):
 '''
 
 class tipoRecursoUpdate(generics.RetrieveUpdateAPIView):
-    queryset = Tipo_Recurso.objects.all()
+    queryset = Tipo_Recurso.objects.all().order_by('nombre')
     serializer_class = Tipo_RecursoSerializer
 
 '''
@@ -197,7 +197,7 @@ def categoriaList(request):
         return Response(serializer.data)
 '''
 class categoriaList(generics.ListAPIView):
-    queryset = Categoria.objects.all()
+    queryset = Categoria.objects.all().order_by('nombre')
     serializer_class = CategoriaSerializer
 
 @api_view(['GET'])
