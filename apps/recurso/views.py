@@ -35,14 +35,14 @@ def recursoList(request):
 
 class recursoList(generics.ListAPIView):
     queryset = Recurso.objects.all()
-    serializer_class = RecursoSerializer
+    serializer_class = RecursoDetailSerializer
 
 
 @api_view(['GET'])
 def recursoDetail(request, pk):
     try:
         recursos = Recurso.objects.get(id=pk);
-        serializer = RecursoSerializer(recursos, many=False)
+        serializer = RecursoDetailSerializer(recursos)
         return Response(serializer.data)
     except Recurso.DoesNotExist:
         return Response({})
@@ -75,9 +75,17 @@ class recursoUpdate(generics.RetrieveUpdateAPIView):
 '''
 @api_view(['DELETE'])
 def recursoDelete(request, pk):
-    recurso = Recurso.objects.get(id=pk)
-    recurso.delete()
-    return Response('Recurso Eliminado!')
+    try:
+        recurso = Recurso.objects.get(id=pk)
+        recurso.removed = True
+        recurso.save(update_fields=['removed'])
+        return Response({
+            'removed': True,
+        })
+    except Recurso.DoesNotExist:
+        return Response({
+            'removed': False,
+        })
 '''
 
 class recursoDelete(generics.DestroyAPIView):

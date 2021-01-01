@@ -13,7 +13,7 @@ from .util import get_file_name
 # Create your models here.
 
 class Tipo_Recurso(models.Model):
-    id = models.AutoField(primary_key=True, )
+    id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
     def __str__(self):
         return self.nombre
@@ -21,7 +21,7 @@ class Tipo_Recurso(models.Model):
         ordering = ['nombre']
 
 class Categoria(models.Model):
-    id = models.AutoField(primary_key=True, )
+    id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=250)
     def __str__(self):
         return self.nombre
