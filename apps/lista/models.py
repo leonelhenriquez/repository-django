@@ -12,7 +12,8 @@ class Tipo_Lista(models.Model):
 
 class Lista(models.Model):
     id = models.AutoField(primary_key=True,)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE,)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    recurso = models.ForeignKey(Recurso, on_delete=models.SET_NULL, null=True)
     tipo = models.ForeignKey(Tipo_Lista, on_delete=models.CASCADE)
     fecha = models.DateField(auto_now_add=True)
     def __str__(self):

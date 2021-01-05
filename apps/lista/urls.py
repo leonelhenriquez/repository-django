@@ -6,10 +6,10 @@ from . import views
 
 urlpatterns = [
   #listas
-	path('lista-listas/', views.listaListas.as_view(), name='api-overview-lista'),
-	path('lista-detail/<str:pk>/', views.listaDetail, name="lista-detail"),
-	path('lista-create/', views.listaCreate.as_view(), name="lista-create"),
-	path('lista-update/<str:pk>/', views.listaUpdate.as_view(), name="lista-update"),
+	path('lista-listas/<str:idUsuario>/<str:tipo>/', views.listaListas, name='api-overview-lista'),
+	#path('lista-detail/<str:pk>/', views.listaDetail, name="lista-detail"),
+	path('lista-add/', views.listaCreate.as_view(), name="lista-create"),
+	#path('lista-update/<str:pk>/', views.listaUpdate.as_view(), name="lista-update"),
 	path('lista-delete/<str:pk>/', views.listaDelete.as_view(), name="lista-delete"),
     #tipo listas
 	path('tipo-lista-listas/', views.tipolistaListas.as_view(), name='api-overview-tipo-lista'),

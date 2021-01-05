@@ -33,10 +33,16 @@ def listaListas(APIView):
     serializer = ListaSerializer(listas, many=True)
     return Response(serializer.data)
 '''
-
+'''
 class listaListas(generics.ListAPIView):
     queryset = Lista.objects.all()
     serializer_class = ListaSerializer
+'''
+@api_view(['GET'])
+def listaListas(request, idUsuario, tipo):
+    listas = Lista.objects.filter(usuario=idUsuario, tipo=tipo)
+    serializer = ListaDetailSerializer(listas, many=True)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def listaDetail(request, pk):
