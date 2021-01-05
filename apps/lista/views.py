@@ -45,6 +45,12 @@ def listaListas(request, idUsuario, tipo):
     return Response(serializer.data)
 
 @api_view(['GET'])
+def listaListasNoDetail(request, idUsuario, tipo):
+    listas = Lista.objects.filter(usuario=idUsuario, tipo=tipo)
+    serializer = ListaSerializer(listas, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
 def listaDetail(request, pk):
 	tasks = Lista.objects.get(id=pk)
 	serializer = ListaSerializer(tasks, many=False)

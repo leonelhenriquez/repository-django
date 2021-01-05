@@ -7,6 +7,7 @@ from . import views
 urlpatterns = [
   #listas
 	path('lista-listas/<str:idUsuario>/<str:tipo>/', views.listaListas, name='api-overview-lista'),
+	path('lista-listas_nodetail/<str:idUsuario>/<str:tipo>/', views.listaListasNoDetail, name='api-overview-lista'),
 	#path('lista-detail/<str:pk>/', views.listaDetail, name="lista-detail"),
 	path('lista-add/', views.listaCreate.as_view(), name="lista-create"),
 	#path('lista-update/<str:pk>/', views.listaUpdate.as_view(), name="lista-update"),
