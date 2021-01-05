@@ -51,10 +51,13 @@ def listaListasNoDetail(request, idUsuario, tipo):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def listaDetail(request, pk):
-	tasks = Lista.objects.get(id=pk)
-	serializer = ListaSerializer(tasks, many=False)
-	return Response(serializer.data)
+def listaDetail(request, idUsuario, tipo, recurso):
+    try:
+        tasks = Lista.objects.get(usuario=idUsuario, tipo=tipo, recurso=recurso)
+        serializer = ListaDetailSerializer__Tipo(tasks, many=False)
+        return Response(serializer.data)
+    except Lista.DoesNotExist:
+        return Response({})
 
 '''
 @api_view(['POST'])

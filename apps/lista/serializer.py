@@ -25,3 +25,10 @@ class ListaDetailSerializer(serializers.ModelSerializer):
         many=True
         model = Lista
         fields = '__all__'
+
+class ListaDetailSerializer__Tipo(serializers.ModelSerializer):
+    tipo = Tipo_ListaSerializer(read_only=True)
+    class Meta:
+        many=True
+        model = Lista
+        fields = '__all__'
