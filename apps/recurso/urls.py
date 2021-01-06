@@ -7,6 +7,7 @@ app_name='lista'
 urlpatterns = [
     #CRUD Recurso
     path('recurso-list/', views.recursoList.as_view(), name="recurso-list"),
+    path('recurso-userlist/<int:user>/', views.recursoUserList, name="recurso-userlist"),
     path('recurso-detail/<str:pk>/', views.recursoDetail, name="recurso-detail"),
     path('recurso-create/', views.recursoCreate.as_view(), name='recurso-create'),
     path('recurso-update/<str:pk>/', views.recursoUpdate.as_view(), name='recurso-update'),
