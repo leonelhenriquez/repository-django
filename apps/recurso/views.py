@@ -6,9 +6,12 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.filters import SearchFilter, OrderingFilter
 from .models import *
 from .serializer import *
 from apps.recurso import serializer
+
+
 
 # Create your views here.
 
@@ -30,6 +33,9 @@ def apiOverview(request):
 class recursoList(generics.ListAPIView):
     queryset = Recurso.objects.all().order_by('-fecha','-id')
     serializer_class = RecursoDetailSerializer
+
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ('titulo','descripcion', 'tipo__nombre', 'autor', 'categoria__nombre')
     
 @api_view(['GET'])
 def recursoUserList(request, user):

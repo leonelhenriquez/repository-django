@@ -20,7 +20,7 @@ urlpatterns = [
 	path('tipo-lista-delete/<str:pk>/', views.tipolistaDelete.as_view(), name="tipo-lista-delete"),
 	#lista-libro
  	path('lista-libro-list/', views.lista_LibroListas.as_view(), name='lista-libro-list'),
-  path('lista-libro-detail/<str:pk>/', views.lista_LibroDetail, name="lista-libro-detail"),
+  	path('lista-libro-detail/<str:pk>/', views.lista_LibroDetail, name="lista-libro-detail"),
 	path('lista-libro-create/', views.lista_LibroCreate.as_view(), name="lista-libro-create"),
 	path('lista-libro-update/<str:pk>/', views.lista_LibroUpdate.as_view(), name="lista-libro-update"),
 	path('lista-libro-delete/<str:pk>/', views.lista_LibroDelete.as_view(), name="lista-libro-delete"),
