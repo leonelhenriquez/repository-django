@@ -1,10 +1,10 @@
 {% load i18n %}{% autoescape off %}
-{% blocktrans %}Está recibiendo este correo electrónico porque
-ha solicitado un restablecimiento de contraseña para su cuenta de usuario en Repository.{% endblocktrans %}
+{% blocktrans %}
+Está recibiendo este correo electrónico porque ha solicitado un restablecimiento de contraseña para su cuenta de usuario en Repository.{% endblocktrans %}
 
 {% trans "Por favor, vaya a la siguiente página y elija una nueva contraseña:" %}
 {% block reset_link %}
-{{ protocol }}:/{% url 'password_reset_confirm' uidb64=uid token=token %}
+https://repository.studio{% url 'password_reset_confirm' uidb64=uid token=token %}
 {% endblock %}
 {% trans "Su nombre de usuario, en caso de que haya olvidado: " %} {{ user.get_username }}
 

@@ -1,4 +1,4 @@
 {% load i18n %}
 {% autoescape off %}
-{% blocktrans %} Confirme su dirección de correo electrónico a través de API {% endblocktrans %}
+{% blocktrans %} Bienvenido a Repository {% endblocktrans %}
 {% endautoescape %}

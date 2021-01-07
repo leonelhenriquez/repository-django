@@ -76,6 +76,7 @@ class PasswordResetSerializer(serializers.Serializer):
 
             ###### USE YOUR TEXT FILE ######
             'email_template_name': 'example_message.txt',
+            'subject_template_name': 'example_subject.txt',
 
             'request': request,
         }

@@ -18,6 +18,9 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView, RedirectView
+from rest_auth.views import PasswordResetConfirmView
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('lista/', include('apps.lista.urls'), name='lista'),
@@ -25,7 +28,7 @@ urlpatterns = [
     path('rest-auth/', include('apps.usuario.urls'), name='rest-auth'),
 
     # this url is used to generate email content
-    path('djangoproject.com/<uidb64>/<token>/', RedirectView.as_view(url='https://djangoproject.com'), name='password_reset_confirm'),
+    path('passwordreset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     #path('go-to-django/', RedirectView.as_view(url='https://djangoproject.com'), name='go-to-django'),
     path('admin/', admin.site.urls),
 ]
