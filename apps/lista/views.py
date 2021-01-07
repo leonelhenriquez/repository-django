@@ -40,13 +40,13 @@ class listaListas(generics.ListAPIView):
 '''
 @api_view(['GET'])
 def listaListas(request, idUsuario, tipo):
-    listas = Lista.objects.filter(usuario=idUsuario, tipo=tipo)
+    listas = Lista.objects.filter(usuario=idUsuario, tipo=tipo).order_by('-fecha','-id')
     serializer = ListaDetailSerializer(listas, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
 def listaListasNoDetail(request, idUsuario, tipo):
-    listas = Lista.objects.filter(usuario=idUsuario, tipo=tipo)
+    listas = Lista.objects.filter(usuario=idUsuario, tipo=tipo).order_by('-fecha','-id')
     serializer = ListaDetailSerializer__Tipo(listas, many=True)
     return Response(serializer.data)
 

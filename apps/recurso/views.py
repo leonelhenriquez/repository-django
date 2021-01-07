@@ -28,12 +28,12 @@ def apiOverview(request):
 #API CRUD Recurso
 
 class recursoList(generics.ListAPIView):
-    queryset = Recurso.objects.all()
+    queryset = Recurso.objects.all().order_by('-fecha','-id')
     serializer_class = RecursoDetailSerializer
     
 @api_view(['GET'])
 def recursoUserList(request, user):
-    recursos = Recurso.objects.filter(usuario=user)
+    recursos = Recurso.objects.filter(usuario=user).order_by('-fecha','-id')
     serializer = RecursoDetailSerializer(recursos, many=True)
     return Response(serializer.data)
 
